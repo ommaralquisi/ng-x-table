@@ -1,0 +1,19 @@
+{
+  "name": "@ommaralquisi/ng-x-table",
+  "version": "0.0.3",
+  "author": "Ommar Alquisi <ommaralquisi@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ommaralquisi/ng-x-table"
+  },
+  "homepage": "https://ommaralquisi.github.io/ng-x-table/",
+  "keywords": [
+    "angular",
+    "ng-x-table"
+  ],
+  "peerDependencies": {
+    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
+    "ngx-bootstrap": "^3.0.1"
+  }
+}

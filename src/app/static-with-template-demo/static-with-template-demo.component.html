@@ -1,0 +1,141 @@
+
+<div class='table-responsive'>
+  <ngx-table [tableData]=data [columns]=columns [config]="config" (tableChange)="tableChange($event)" [component]="appComponent">
+      <ng-template #rows let-item="dataRow" let-i="index" let-component="component">
+          <td>{{item.id }}</td>
+         <td>{{item.name }}</td>
+         <td>{{item.email }}</td>
+         <td>{{item.age}}</td>
+         <td style='cursor: pointer;' title="open console to see message" (click)="component.logMe(item.phone)">{{item.phone}}</td>
+         <td><a href="https://en.wikipedia.org/wiki/{{item.city}}">{{item.city}}</a></td>
+         <td>{{item.rank}}</td>
+         <td>{{item.donation | currency}}</td>
+       </ng-template>
+  </ngx-table>
+</div>
+  
+<div class='container'>
+  <tabset>
+      <tab heading="Module" id="tab1">
+          <pre>
+            <code class="lang-typescript">
+import &#123; NgxTableModule &#125; from 'ngx-table';
+@NgModule(&#123;
+declarations: [
+  AppComponent
+],
+imports: [
+  BrowserModule,
+  NgxTableModule, // import ngx-table
+  TabsModule.forRoot()
+],
+providers: [
+    // provide any pipe that need to be applied to the table
+    &#123;provide: 'currency', useClass: CurrencyPipe&#125;,
+],
+bootstrap: [AppComponent]
+&#125;)
+            </code>
+        </pre>
+      </tab>
+      <tab heading="Template" id="tab2">
+          <pre>
+              <code class="language-markup">
+&lt;ngx-table  [tableData]=data 
+            [columns]=columns 
+            [config]="config" 
+            (tableChange)="tableChange($event)"
+            [component]="appComponent"&gt;
+                &lt;ng-template #rows let-item="dataRow" let-i="index" let-component="component"&gt;
+                        &lt;td&gt;{{ item.id }<!---->}&lt;/td&gt;
+                        &lt;td&gt;{{ item.name }<!---->}&lt;/td&gt;
+                        &lt;td&gt;{{ item.email }<!---->}&lt;/td&gt;
+                        &lt;td&gt;{{ item.age }<!---->}&lt;/td&gt;
+                        &lt;td style='cursor: pointer;' title="open console to see message" (click)="component.logMe(item.phone)"&gt;{{ item.phone }<!---->}&lt;/td&gt;
+                        &lt;td&gt;&lt;a href="https://en.wikipedia.org/wiki/{{ item.city }<!---->}"&gt;{{ item.city }<!---->}&lt;/a&gt;&lt;/td&gt;
+                        &lt;td&gt;{{ item.rank }<!---->}&lt;/td&gt;
+                        &lt;td&gt;{{ item.donation | currency }<!---->}}&lt;/td&gt;
+                &lt;/ng-template&gt;
+&lt;/ngx-table&gt;
+            </code></pre>
+      </tab>
+      <tab heading="Component" id="tab3">
+          <pre>
+                <code class="lang-typescript">
+import &#123; IColumns, ITableConfig, ISorting, IFiltering &#125; from 'ngx-table/ngx-table';
+
+@Component(&#123;
+selector: 'app-root',
+templateUrl: './app.component.html',
+styleUrls: ['./app.component.css']
+&#125;)    
+
+export class AppComponent &#123;
+    data: any;
+    columns: IColumns[] = [
+        &#123; title: 'ID', name: 'id', sorting: true, sort: '', filter: true &#125;,
+        &#123; title: 'Name', name: 'name', sorting: true, sort: '', filter: true &#125;,
+        &#123; title: 'Email', name: 'email', sorting: true, sort: '' &#125;,
+        &#123; title: 'Age', name: 'age', sorting: true, sort: 'asc' &#125;,
+        &#123; title: 'Phone', name: 'phone', sorting: true, sort: '' &#125;,
+        &#123; title: 'City', name: 'city', sorting: true, sort: '' &#125;,
+        &#123; title: 'Rank', name: 'rank', sorting: true, sort: '' &#125;,
+        &#123; title: 'Donation', name: 'donation', sorting: true, sort: '' , pipe: 'currency'&#125;
+    ];
+    config: ITableConfig = &#123;
+        total: 0,
+        itemPerPage: 10, // how many item should the table display
+        currentPage: 1, // the current page the table displaying
+    &#125;
+    constructor() &#123;
+        this.appComponent = this;
+        this.config.total = names.length;
+        this.data = names.slice(
+        (this.config.currentPage - 1) * this.config.itemPerPage,
+        this.config.currentPage * this.config.itemPerPage
+        );
+    &#125;
+
+    tableChange(config: ITableConfig) &#123;
+        console.log(config);
+        let tempData = names;
+        tempData = config.sorting ? this.sorting(config.sorting, tempData) : tempData;
+        tempData = config.filtering ? this.filtering(config.filtering, tempData) : tempData;
+        this.config.total = tempData.length;
+        this.data = tempData.slice((config.currentPage - 1) * config.itemPerPage, config.currentPage * config.itemPerPage);
+    &#125;
+
+    sorting(sorting: ISorting, data) &#123;
+        const columnName = sorting.column;
+        const sortDirection = sorting.direction;
+        if (!columnName) &#123;
+            return;
+        &#125;
+
+        data.sort((previous: any, current: any) => &#123;
+            if (previous[columnName] > current[columnName]) &#123;
+            return sortDirection === 'desc' ? -1 : 1;
+            &#125; else if (previous[columnName] < current[columnName]) &#123;
+            return sortDirection === 'asc' ? -1 : 1;
+            &#125;
+            return 0;
+        &#125;);
+        return data;
+    &#125;
+
+    filtering(filtering: IFiltering, data) &#123;
+        return data.filter(name => &#123;
+            const regex = new RegExp(escapeRegExp(filtering.filteringString), 'i');
+            return name[filtering.column].toString().match(regex);
+        &#125;);
+    &#125;
+
+    logMe(phone) &#123;
+        console.log(phone);
+    &#125;
+&#125;                     
+</code>
+        </pre>
+      </tab>
+  </tabset>
+</div>

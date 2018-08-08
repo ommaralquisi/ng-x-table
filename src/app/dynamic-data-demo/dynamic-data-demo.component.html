@@ -1,0 +1,96 @@
+<div class='table-responsive'>
+  <ngx-table [tableData]="names" [columns]="columns" [config]="config" (tableChange)="tableChange($event)" [loading]="loading">
+  </ngx-table>
+</div>
+<div class='container'>
+  <tabset>
+      <tab heading="Module" id="tab1">
+          <pre>
+            <code class="lang-typescript">
+import &#123; NgxTableModule &#125; from 'ngx-table';
+@NgModule(&#123;
+declarations: [
+  AppComponent
+],
+imports: [
+  BrowserModule,
+  NgxTableModule, // import ngx-table
+  TabsModule.forRoot()
+],
+providers: [
+    // provide any pipe that need to be applied to the table
+    &#123;provide: 'currency', useClass: CurrencyPipe&#125;,
+],
+bootstrap: [AppComponent]
+&#125;)
+            </code>
+        </pre>
+      </tab>
+      <tab heading="Template" id="tab2">
+          <pre>
+              <code class="language-markup">
+&lt;ngx-table  [tableData]=data 
+          [columns]=columns 
+          [config]="config" 
+          (tableChange)="tableChange($event)"&gt;
+&lt;/ngx-table&gt;
+            </code></pre>
+      </tab>
+      <tab heading="Component" id="tab3">
+          <pre>
+                <code class="lang-typescript">
+import &#123; IColumns, ITableConfig, ISorting, IFiltering &#125; from 'ngx-table/ngx-table';
+
+@Component(&#123;
+selector: 'app-root',
+templateUrl: './app.component.html',
+styleUrls: ['./app.component.css']
+&#125;)    
+
+export class AppComponent &#123;
+names: any[];
+loading: boolean;
+columns: IColumns[] = [
+    &#123; title: 'ID', name: 'id', sorting: true, sort: '', filter: true &#125;,
+    &#123; title: 'Name', name: 'name', sorting: true, sort: '', filter: true &#125;,
+    &#123; title: 'Email', name: 'email', sorting: true, sort: '' &#125;,
+    &#123; title: 'Age', name: 'age', sorting: true, sort: 'asc' &#125;,
+    &#123; title: 'Phone', name: 'phone', sorting: true, sort: '' &#125;,
+    &#123; title: 'City', name: 'city', sorting: true, sort: '' &#125;,
+    &#123; title: 'Rank', name: 'rank', sorting: true, sort: '' &#125;,
+    &#123; title: 'Donation', name: 'donation', sorting: true, sort: '' , pipe: 'currency'&#125;
+];
+config: ITableConfig = &#123;
+    total: 0,
+    itemPerPage: 10, // how many item should the table display
+    currentPage: 1, // the current page the table displaying
+&#125;
+constructor() &#123;&#125;
+
+ngOnInit() &#123;
+  this.loading = true;
+  this.service
+    .getNames(this.config.itemPerPage, (this.config.currentPage - 1) * this.config.itemPerPage)
+    .subscribe(data => &#123;
+      this.config.total = data['count'];
+      this.names = data['names'];
+      this.loading = false;
+    &#125;);
+&#125;
+
+tableChange(config: ITableConfig) &#123;
+  this.loading = true;
+  this.service
+    .getNames(config.itemPerPage, (config.currentPage - 1) * config.itemPerPage)
+    .subscribe(data => &#123;
+        this.config.total = data['count'];
+        this.names = data['names'];
+        this.loading = false;
+      &#125;);
+&#125;
+              
+</code>
+        </pre>
+      </tab>
+  </tabset>
+</div>
