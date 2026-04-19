@@ -17,13 +17,13 @@
       "es2017",
       "dom"
     ],
-    // "paths": {
-    //   "ngx-table": [
-    //     "dist/ng-x-table"
-    //   ],
-    //   "ngx-table/*": [
-    //     "dist/ng-x-table/*"
-    //   ]
-    // }
+    "paths": {
+      "@ommaralquisi/ng-x-table": [
+        "dist/ngx-table"
+      ],
+      "@ommaralquisi/ng-x-table/*": [
+        "dist/ngx-table/*"
+      ]
+    }
   }
 }

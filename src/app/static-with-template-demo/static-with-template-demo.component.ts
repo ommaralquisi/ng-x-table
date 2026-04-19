@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ITableConfig, IColumns, ISorting, IFiltering } from '@ommaralquisi/ng-x-table';
 import { names } from '../helper/staticNames';
-import { escapeRegExp } from 'tslint/lib/utils';
+
+function escapeRegExp(str: string): string {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
 
 @Component({
   selector: 'app-static-with-template-demo',
