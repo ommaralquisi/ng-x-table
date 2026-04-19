@@ -13,6 +13,7 @@
     "useDefineForClassFields": false,
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2022", "dom", "dom.iterable"],
+    "preserveSymlinks": true,
     "paths": {
       "@ommaralquisi/ng-x-table": ["dist/ngx-table"],
       "@ommaralquisi/ng-x-table/*": ["dist/ngx-table/*"]

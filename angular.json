@@ -90,9 +90,7 @@
             "project": "projects/ng-x-table/ng-package.json"
           },
           "configurations": {
-            "production": {
-              "project": "projects/ng-x-table/ng-package.prod.json"
-            }
+            "production": {}
           }
         },
         "test": {

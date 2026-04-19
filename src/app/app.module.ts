@@ -9,7 +9,7 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { StaticDataDemoComponent } from './static-data-demo/static-data-demo.component';
 import { DynamicDataDemoComponent } from './dynamic-data-demo/dynamic-data-demo.component';
 import { StaticWithTemplateDemoComponent } from './static-with-template-demo/static-with-template-demo.component';
-import { NgxTableModule, NGX_PIPE_REGISTRY } from '@ommaralquisi/ng-x-table';
+import { NgxTableModule, provideNgxTable } from '@ommaralquisi/ng-x-table';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,7 @@ import { NgxTableModule, NGX_PIPE_REGISTRY } from '@ommaralquisi/ng-x-table';
   ],
   providers: [
     CurrencyPipe,
-    { provide: NGX_PIPE_REGISTRY, useValue: { currency: CurrencyPipe } },
+    provideNgxTable({ currency: CurrencyPipe }),
   ],
   bootstrap: [AppComponent]
 })
