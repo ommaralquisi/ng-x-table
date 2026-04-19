@@ -1,7 +1,7 @@
 import { CurrencyPipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { TabsModule } from 'ngx-bootstrap';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { InMemoryDataService } from './helper/in-memory.service';
@@ -23,7 +23,7 @@ import { NgxTableModule, NGX_PIPE_REGISTRY } from '@ommaralquisi/ng-x-table';
     NgxTableModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService),
-    TabsModule.forRoot()
+    TabsModule
   ],
   providers: [
     CurrencyPipe,

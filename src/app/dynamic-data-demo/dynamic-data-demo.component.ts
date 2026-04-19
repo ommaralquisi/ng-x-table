@@ -4,6 +4,7 @@ import { GetNamesService } from '../get-names.service';
 
 @Component({
   selector: 'app-dynamic-data-demo',
+  standalone: false,
   templateUrl: './dynamic-data-demo.component.html',
   styleUrls: ['./dynamic-data-demo.component.css']
 })

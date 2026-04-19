@@ -8,6 +8,7 @@ function escapeRegExp(str: string): string {
 
 @Component({
   selector: 'app-static-data-demo',
+  standalone: false,
   templateUrl: './static-data-demo.component.html',
   styleUrls: ['./static-data-demo.component.css']
 })

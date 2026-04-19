@@ -13,7 +13,11 @@
       "Bash(npm config *)",
       "Bash(npm uninstall *)",
       "Bash(node_modules/.bin/ng serve *)",
-      "Bash(NODE_OPTIONS=--openssl-legacy-provider node_modules/.bin/ng serve *)"
+      "Bash(NODE_OPTIONS=--openssl-legacy-provider node_modules/.bin/ng serve *)",
+      "Bash(git checkout *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(npm error *)"
     ]
   }
 }

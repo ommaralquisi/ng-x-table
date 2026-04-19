@@ -2,7 +2,8 @@ import { Injector, Pipe, PipeTransform, Type } from '@angular/core';
 import { NGX_PIPE_REGISTRY } from './pipe-registry.token';
 
 @Pipe({
-  name: 'getPipe'
+  name: 'getPipe',
+  standalone: true
 })
 export class GetPipe implements PipeTransform {
 
