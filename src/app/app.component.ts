@@ -5,6 +5,7 @@ import 'prismjs/components/prism-typescript';
 
 @Component({
   selector: 'app-root',
+  standalone: false,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

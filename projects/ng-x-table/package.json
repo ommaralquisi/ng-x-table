@@ -1,6 +1,6 @@
 {
   "name": "@ommaralquisi/ng-x-table",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "author": "Ommar Alquisi <ommaralquisi@gmail.com>",
   "repository": {
     "type": "git",
@@ -12,8 +12,8 @@
     "ng-x-table"
   ],
   "peerDependencies": {
-    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
-    "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
-    "ngx-bootstrap": "^3.0.1"
+    "@angular/common": "^19.0.0",
+    "@angular/core": "^19.0.0",
+    "ngx-bootstrap": "^19.0.0"
   }
 }

@@ -1,9 +1,17 @@
 import { Component, ContentChild, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ITableConfig, IColumns } from './interfaces';
+import { GetPipe } from './get.pipe';
+import { TableSortingDirective } from './table-sorting.directive';
+import { ItemsPerPageComponent } from './items-per-page/items-per-page.component';
 
 @Component({
   selector: 'ngx-table',
+  standalone: true,
+  imports: [CommonModule, FormsModule, PaginationModule, GetPipe, TableSortingDirective, ItemsPerPageComponent],
   template: `
   <table class="table table-striped table-bordered" [ngClass]="{'loader': loading}">
   <thead>
@@ -19,7 +27,7 @@ import { ITableConfig, IColumns } from './interfaces';
   <tbody>
   <tr *ngIf="displayFilterRow">
     <td *ngFor="let column of columns">
-      <input *ngIf="column.filter" (input)="columnFilter(column, $event.target.value)" class="form-control"/>
+      <input *ngIf="column.filter" (input)="columnFilter(column, $any($event.target).value)" class="form-control"/>
     </td>
   </tr>
   <tr *ngFor="let dataRow of tableData; let i = index">
@@ -110,7 +118,7 @@ import { ITableConfig, IColumns } from './interfaces';
 `],
 })
 export class NgxTableComponent implements OnInit {
-  @ContentChild('rows') rows: any;
+  @ContentChild('rows', { static: false }) rows: any;
   @Input() config: ITableConfig;
   @Input() tableData;
   @Input() columns;

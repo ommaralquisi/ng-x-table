@@ -1,7 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'ngx-items-per-page',
+  standalone: true,
+  imports: [CommonModule],
   template: `
     <div class="btn-group">
       <label style="border: 1px solid #dee2e6;" class="btn" [ngClass]="{ 'btn-primary': item.active}"

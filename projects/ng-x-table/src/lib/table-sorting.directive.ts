@@ -1,7 +1,8 @@
 import { Directive, Input, Output, EventEmitter, HostListener } from '@angular/core';
 
 @Directive({
-  selector: '[ngxTableSortingDirective]'
+  selector: '[ngxTableSortingDirective]',
+  standalone: true
 })
 export class TableSortingDirective {
   @Input() public column: any;
