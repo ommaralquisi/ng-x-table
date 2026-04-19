@@ -17,7 +17,14 @@
       "Bash(git checkout *)",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(npm error *)"
+      "Bash(npm error *)",
+      "WebFetch(domain:angular.dev)",
+      "Bash(git rm *)",
+      "Bash(npm view *)",
+      "Bash(pkill -f \"ng serve\")",
+      "Bash(npm run *)",
+      "Bash(python3 -c \"import json,sys; cfg=json.load\\(sys.stdin\\); print\\(json.dumps\\(cfg['projects']['ng-x-table']['architect']['build'], indent=2\\)\\)\")",
+      "Bash(python3 -c \"import json,sys; pkg=json.load\\(sys.stdin\\); print\\(json.dumps\\({k:v for k,v in pkg.get\\('scripts',{}\\).items\\(\\)}, indent=2\\)\\)\")"
     ]
   }
 }
