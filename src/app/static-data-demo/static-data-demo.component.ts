@@ -13,6 +13,41 @@ function escapeRegExp(str: string): string {
   styleUrls: ['./static-data-demo.component.css']
 })
 export class StaticDataDemoComponent {
+  moduleCode = `import { CurrencyPipe } from '@angular/common';
+import { NgxTableModule, provideNgxTable } from '@ommaralquisi/ng-x-table';
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, NgxTableModule],
+  providers: [
+    CurrencyPipe,
+    provideNgxTable({ currency: CurrencyPipe }),
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}`;
+
+  templateCode = `<ngx-table
+  [tableData]="data"
+  [columns]="columns"
+  [config]="config"
+  (tableChange)="tableChange($event)">
+</ngx-table>`;
+
+  componentCode = `import { IColumns, ITableConfig, ISorting, IFiltering } from '@ommaralquisi/ng-x-table';
+
+@Component({ selector: 'app-root', standalone: false, templateUrl: './app.component.html' })
+export class AppComponent {
+  data: any[];
+  columns: IColumns[] = [
+    { title: 'ID',       name: 'id',       sorting: true, sort: '', filter: true },
+    { title: 'Name',     name: 'name',     sorting: true, sort: '', filter: true },
+    { title: 'Donation', name: 'donation', sorting: true, sort: '', pipe: 'currency' },
+  ];
+  config: ITableConfig = { total: 0, itemPerPage: 10, currentPage: 1 };
+
+  tableChange(config: ITableConfig) { /* re-slice or re-fetch data */ }
+}`;
 
   data: any;
   columns: IColumns[] = [
